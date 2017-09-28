@@ -26,7 +26,9 @@ def b():
     return 'b'
 
 
-@pytest.mark.parametrize('c,d', [('c', 'd')])
+@pytest.mark.parametrize(
+    'c,d', [('c', 'd'), ('C', 'D')], ids='low upper'.split())
 @regular_decorator('foo', 'bar')
 def test_regular_decorator(a, b, c, d):
-    assert ('a', 'b', 'c', 'd') == (a, b, c, d)
+    assert ('a', 'b', 'c'.capitalize(), 'd'.capitalize()) == (
+        a, b, c.capitalize(), d.capitalize())
